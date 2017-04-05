@@ -1,5 +1,6 @@
 
 import java.rmi.RemoteException;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,13 +23,8 @@ public class PantallaIdentificacion extends Pantalla {
     public PantallaIdentificacion(InterfazMultas stub) {
         
         initComponents();
-        this.inicializar();
-        PantallaIdentificacion.stub = stub;
-    }
-    
-    private void inicializar()
-    {
         super.inicializar(300, 200, "Identifícate");
+        PantallaIdentificacion.stub = stub;
     }
 
     /**
@@ -90,18 +86,23 @@ public class PantallaIdentificacion extends Pantalla {
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
         
         String DNI = tfDNI.getText();
+        int result = 0;
         
         try 
         {
-            Integer result = stub.indentificacion(DNI);
-            
-            tfDNI.setText(result.toString());
+            result = stub.indentificacion(DNI);
         } 
         
         catch (RemoteException ex) 
         {
             
         }
+        
+        if(result == 0)
+            JOptionPane.showMessageDialog(null, "El DNI introducido no es correcto.");
+        
+        else
+            new PantallaGestion(stub).setVisible(true);
     }//GEN-LAST:event_bAceptarActionPerformed
 
     /**

@@ -11,13 +11,8 @@ public class PantallaInicial extends Pantalla {
     public PantallaInicial(InterfazMultas stub) 
     {
         initComponents();
-        this.inicializar();
-        PantallaInicial.stub = stub;
-    }
-   
-    private void inicializar()
-    {
         super.inicializar(500, 600, "Bienvenido a la aplicación de multas de la DGT");
+        PantallaInicial.stub = stub;
     }
 
     /**
