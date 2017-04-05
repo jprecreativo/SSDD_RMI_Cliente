@@ -1,24 +1,23 @@
-package interfaces;
 
-import java.awt.Component;
 
-public class PantallaInicial extends javax.swing.JFrame {
+public class PantallaInicial extends Pantalla {
 
+    private static InterfazMultas stub;
+    
     /**
      * Creates new form PantallaInicial
+     * @param stub
      */
-    public PantallaInicial() 
+    public PantallaInicial(InterfazMultas stub) 
     {
         initComponents();
         this.inicializar();
+        PantallaInicial.stub = stub;
     }
-    
+   
     private void inicializar()
     {
-        this.setSize(500, 600);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Bienvenido a la aplicación de multas de la DGT");
-        this.setResizable(false);
+        super.inicializar(500, 600, "Bienvenido a la aplicación de multas de la DGT");
     }
 
     /**
@@ -30,20 +29,58 @@ public class PantallaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         logoDGT = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        bAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         logoDGT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoDGT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoDGT.jpg"))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setText("Menú consultas");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Identificación");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Consultar puntos");
+
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setText("Consultar multas");
+
+        bAceptar.setText("Aceptar");
+        bAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAceptarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(logoDGT, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(logoDGT, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jLabel1)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(207, 207, 207)
+                        .addComponent(bAceptar)))
                 .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -51,11 +88,26 @@ public class PantallaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logoDGT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(489, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addComponent(jLabel1)
+                .addGap(46, 46, 46)
+                .addComponent(jRadioButton1)
+                .addGap(36, 36, 36)
+                .addComponent(jRadioButton2)
+                .addGap(34, 34, 34)
+                .addComponent(jRadioButton3)
+                .addGap(60, 60, 60)
+                .addComponent(bAceptar)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+        
+        new PantallaIdentificacion(stub).setVisible(true);
+    }//GEN-LAST:event_bAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,12 +139,18 @@ public class PantallaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PantallaInicial().setVisible(true);
+                new PantallaInicial(stub).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAceptar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel logoDGT;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,3 @@
-
-
-import interfaces.PantallaInicial;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -10,8 +7,8 @@ public class SSDD_RMI_Cliente
 {
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException 
     {
-        InterfazMultas stub = (InterfazMultas) Naming.lookup("rmi://localhost:12345/Multas");
-        PantallaInicial inicial = new PantallaInicial();
+        final InterfazMultas stub = (InterfazMultas) Naming.lookup("rmi://localhost:12345/Multas");
+        PantallaInicial inicial = new PantallaInicial(stub);
         
         inicial.setVisible(true);
     }
