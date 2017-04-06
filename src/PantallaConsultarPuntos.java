@@ -36,13 +36,13 @@ public class PantallaConsultarPuntos extends Pantalla {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tfDNI = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfMat = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jlInfo = new javax.swing.JLabel();
+        cbDNI = new javax.swing.JComboBox<>();
+        cbMat = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("DNI:");
@@ -60,6 +60,12 @@ public class PantallaConsultarPuntos extends Pantalla {
         jlInfo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        cbDNI.setEditable(true);
+        cbDNI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "45134789", "45111786" }));
+
+        cbMat.setEditable(true);
+        cbMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7861-HJI", "5661-LLK", "0988-HKP" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,12 +77,12 @@ public class PantallaConsultarPuntos extends Pantalla {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 27, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addGap(28, 28, 28))
         );
@@ -86,10 +92,10 @@ public class PantallaConsultarPuntos extends Pantalla {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(tfMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(cbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -100,8 +106,8 @@ public class PantallaConsultarPuntos extends Pantalla {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String DNI = tfDNI.getText();
-        String mat = tfMat.getText();
+        String DNI = cbDNI.getSelectedItem().toString();
+        String mat = cbMat.getSelectedItem().toString();
         
         if(DNI.equals("") || mat.equals("") || !DNI.matches("^[0-9]\\d*$"))
             jlInfo.setText("Los datos especificados no son correctos.");
@@ -110,7 +116,7 @@ public class PantallaConsultarPuntos extends Pantalla {
         {
             try 
             {
-                int result = stub.comprobarPuntos(Integer.parseInt(DNI), tfMat.getText());
+                int result = stub.comprobarPuntos(Integer.parseInt(DNI), mat);
 
                 if(result == -1)
                     jlInfo.setText("Los datos especificados no son correctos.");
@@ -162,11 +168,11 @@ public class PantallaConsultarPuntos extends Pantalla {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbDNI;
+    private javax.swing.JComboBox<String> cbMat;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jlInfo;
-    private javax.swing.JTextField tfDNI;
-    private javax.swing.JTextField tfMat;
     // End of variables declaration//GEN-END:variables
 }
