@@ -1,5 +1,11 @@
 
+import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 
 /*
@@ -37,8 +43,8 @@ public class PantallaIdentificacion extends Pantalla {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tfDNI = new javax.swing.JTextField();
         bAceptar = new javax.swing.JButton();
+        tfDNI = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,15 +64,15 @@ public class PantallaIdentificacion extends Pantalla {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(bAceptar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                        .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel1)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,10 +105,28 @@ public class PantallaIdentificacion extends Pantalla {
         }
         
         if(result == 0)
+        {
+            try 
+            {
+                Clip error = AudioSystem.getClip();
+                
+                error.open(AudioSystem.getAudioInputStream(new File("sounds/Error.wav")));
+                error.start();
+            } 
+            
+            catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) 
+            {
+                
+            }
+            
             JOptionPane.showMessageDialog(null, "El DNI introducido no es correcto.");
+        }
         
         else
+        {
+            this.dispose();
             new PantallaGestion(stub).setVisible(true);
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     /**
@@ -143,6 +167,6 @@ public class PantallaIdentificacion extends Pantalla {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAceptar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField tfDNI;
+    private javax.swing.JPasswordField tfDNI;
     // End of variables declaration//GEN-END:variables
 }

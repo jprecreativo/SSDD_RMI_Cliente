@@ -27,9 +27,9 @@ public class PantallaInicial extends Pantalla {
         buttonGroup1 = new javax.swing.ButtonGroup();
         logoDGT = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rbIdentificacion = new javax.swing.JRadioButton();
+        rbConsultarPuntos = new javax.swing.JRadioButton();
+        rbConsultarMultas = new javax.swing.JRadioButton();
         bAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,15 +40,15 @@ public class PantallaInicial extends Pantalla {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Menú consultas");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Identificación");
+        buttonGroup1.add(rbIdentificacion);
+        rbIdentificacion.setSelected(true);
+        rbIdentificacion.setText("Identificación");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Consultar puntos");
+        buttonGroup1.add(rbConsultarPuntos);
+        rbConsultarPuntos.setText("Consultar puntos");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Consultar multas");
+        buttonGroup1.add(rbConsultarMultas);
+        rbConsultarMultas.setText("Consultar multas");
 
         bAceptar.setText("Aceptar");
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,10 +69,10 @@ public class PantallaInicial extends Pantalla {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
+                            .addComponent(rbIdentificacion)
                             .addComponent(jLabel1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3)))
+                            .addComponent(rbConsultarPuntos)
+                            .addComponent(rbConsultarMultas)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(bAceptar)))
@@ -86,11 +86,11 @@ public class PantallaInicial extends Pantalla {
                 .addGap(57, 57, 57)
                 .addComponent(jLabel1)
                 .addGap(46, 46, 46)
-                .addComponent(jRadioButton1)
+                .addComponent(rbIdentificacion)
                 .addGap(36, 36, 36)
-                .addComponent(jRadioButton2)
+                .addComponent(rbConsultarPuntos)
                 .addGap(34, 34, 34)
-                .addComponent(jRadioButton3)
+                .addComponent(rbConsultarMultas)
                 .addGap(60, 60, 60)
                 .addComponent(bAceptar)
                 .addContainerGap(147, Short.MAX_VALUE))
@@ -101,7 +101,16 @@ public class PantallaInicial extends Pantalla {
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
         
-        new PantallaIdentificacion(stub).setVisible(true);
+        if(rbIdentificacion.isSelected())
+            new PantallaIdentificacion(stub).setVisible(true);
+        
+        else if(rbConsultarPuntos.isSelected())
+            new PantallaConsultarPuntos(stub).setVisible(true);
+        
+        else
+        {
+            
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     /**
@@ -143,9 +152,9 @@ public class PantallaInicial extends Pantalla {
     private javax.swing.JButton bAceptar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel logoDGT;
+    private javax.swing.JRadioButton rbConsultarMultas;
+    private javax.swing.JRadioButton rbConsultarPuntos;
+    private javax.swing.JRadioButton rbIdentificacion;
     // End of variables declaration//GEN-END:variables
 }
