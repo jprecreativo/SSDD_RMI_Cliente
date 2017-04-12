@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public interface InterfazMultas extends Remote
 {
     int comprobarPuntos(int dni, String mat) throws RemoteException;
-    LinkedList comprobarMultas(int dni, String mat) throws RemoteException;
+    LinkedList<Multa> comprobarMultas(int dni, String mat) throws RemoteException;
     int indentificacion(String pass) throws RemoteException;
     int ponerMulta(String mat, String fecha, int puntos) throws RemoteException;
     int quitarMulta(String mat, String fecha) throws RemoteException;

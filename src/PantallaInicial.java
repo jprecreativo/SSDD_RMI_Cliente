@@ -108,9 +108,7 @@ public class PantallaInicial extends Pantalla {
             new PantallaConsultarPuntos(stub).setVisible(true);
         
         else
-        {
-            
-        }
+            new PantallaConsultarMultas(stub).setVisible(true);
     }//GEN-LAST:event_bAceptarActionPerformed
 
     /**

@@ -120,6 +120,7 @@ public class PantallaIdentificacion extends Pantalla {
             }
             
             JOptionPane.showMessageDialog(null, "El DNI introducido no es correcto.");
+            tfDNI.setText("");
         }
         
         else
