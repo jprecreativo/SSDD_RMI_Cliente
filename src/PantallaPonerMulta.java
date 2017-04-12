@@ -1,4 +1,3 @@
-
 import java.rmi.RemoteException;
 
 /*
@@ -11,19 +10,22 @@ import java.rmi.RemoteException;
  *
  * @author jose_
  */
-public class PantallaConsultarPuntos extends Pantalla {
+public class PantallaPonerMulta extends Pantalla {
 
     private static InterfazMultas stub;
+    private final Contador contador;
     
     /**
      * Creates new form PantallaConsultarPuntos
      * @param stub Para acceder a los métodos del servidor.
+     * @param contador Servirá para comprobar el tiempo. Si han pasado 5 minutos, no se dejará hacer ninguna acción.
      */
-    public PantallaConsultarPuntos(InterfazMultas stub) {
+    public PantallaPonerMulta(InterfazMultas stub, Contador contador) {
         
         initComponents();
-        super.inicializar(500, 200, "Consultar puntos");
-        PantallaConsultarPuntos.stub = stub;
+        super.inicializar(450, 200, "Poner multa");
+        PantallaPonerMulta.stub = stub;
+        this.contador = contador;
     }
 
     /**
@@ -35,55 +37,55 @@ public class PantallaConsultarPuntos extends Pantalla {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btConsultar = new javax.swing.JButton();
+        btMultar = new javax.swing.JButton();
         jlInfo = new javax.swing.JLabel();
-        cbDNI = new javax.swing.JComboBox<>();
         cbMat = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("DNI:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Matrícula:");
 
-        btConsultar.setText("Consultar");
-        btConsultar.addActionListener(new java.awt.event.ActionListener() {
+        btMultar.setText("Multar");
+        btMultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConsultarActionPerformed(evt);
+                btMultarActionPerformed(evt);
             }
         });
 
         jlInfo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        cbDNI.setEditable(true);
-        cbDNI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "45134789", "45111786" }));
-
         cbMat.setEditable(true);
         cbMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7861-HJI", "5661-LLK", "0988-HKP" }));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setText("Puntos:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(256, 256, 256)
+                        .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(btConsultar)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btMultar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -91,11 +93,11 @@ public class PantallaConsultarPuntos extends Pantalla {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(btConsultar)
-                    .addComponent(cbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btMultar)
+                    .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -104,9 +106,9 @@ public class PantallaConsultarPuntos extends Pantalla {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
+    private void btMultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMultarActionPerformed
         
-        String DNI = cbDNI.getSelectedItem().toString();
+        /* String DNI = cbDNI.getSelectedItem().toString();
         String mat = cbMat.getSelectedItem().toString();
         
         if(DNI.equals("") || mat.equals("") || !DNI.matches("^[0-9]\\d*$"))
@@ -129,8 +131,8 @@ public class PantallaConsultarPuntos extends Pantalla {
             {
 
             }
-        }
-    }//GEN-LAST:event_btConsultarActionPerformed
+        } */
+    }//GEN-LAST:event_btMultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,11 +170,11 @@ public class PantallaConsultarPuntos extends Pantalla {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btConsultar;
-    private javax.swing.JComboBox<String> cbDNI;
+    private javax.swing.JButton btMultar;
     private javax.swing.JComboBox<String> cbMat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel jlInfo;
     // End of variables declaration//GEN-END:variables
 }

@@ -63,7 +63,7 @@ public class PantallaConsultarMultas extends Pantalla {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btConsultar = new javax.swing.JButton();
         jlInfo = new javax.swing.JLabel();
         cbDNI = new javax.swing.JComboBox<>();
         cbMat = new javax.swing.JComboBox<>();
@@ -78,10 +78,10 @@ public class PantallaConsultarMultas extends Pantalla {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Matrícula:");
 
-        jButton1.setText("Consultar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btConsultar.setText("Consultar");
+        btConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btConsultarActionPerformed(evt);
             }
         });
 
@@ -176,7 +176,7 @@ public class PantallaConsultarMultas extends Pantalla {
                                 .addGap(18, 18, 18)
                                 .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                                .addComponent(jButton1)))
+                                .addComponent(btConsultar)))
                         .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
@@ -186,7 +186,7 @@ public class PantallaConsultarMultas extends Pantalla {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1)
+                    .addComponent(btConsultar)
                     .addComponent(cbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
@@ -199,7 +199,7 @@ public class PantallaConsultarMultas extends Pantalla {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         
         String DNI = cbDNI.getSelectedItem().toString();
         String mat = cbMat.getSelectedItem().toString();
@@ -247,7 +247,7 @@ public class PantallaConsultarMultas extends Pantalla {
                 
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,9 +285,9 @@ public class PantallaConsultarMultas extends Pantalla {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btConsultar;
     private javax.swing.JComboBox<String> cbDNI;
     private javax.swing.JComboBox<String> cbMat;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

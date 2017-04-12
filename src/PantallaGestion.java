@@ -1,8 +1,10 @@
 
+import javax.swing.JOptionPane;
 
 public class PantallaGestion extends Pantalla {
 
     private static InterfazMultas stub;
+    private final Contador contador;
     
     /**
      * Creates new form PantallaInicial
@@ -13,6 +15,7 @@ public class PantallaGestion extends Pantalla {
         initComponents();
         super.inicializar(500, 600, "Bienvenido a la aplicación de multas de la DGT");
         PantallaGestion.stub = stub;
+        contador = new Contador();
     }
 
     /**
@@ -27,7 +30,7 @@ public class PantallaGestion extends Pantalla {
         buttonGroup1 = new javax.swing.ButtonGroup();
         logoDGT = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rbPonerMulta = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         bAceptar = new javax.swing.JButton();
@@ -41,9 +44,9 @@ public class PantallaGestion extends Pantalla {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Menú gestión");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Poner multa");
+        buttonGroup1.add(rbPonerMulta);
+        rbPonerMulta.setSelected(true);
+        rbPonerMulta.setText("Poner multa");
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Quitar multa");
@@ -73,7 +76,7 @@ public class PantallaGestion extends Pantalla {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
+                            .addComponent(rbPonerMulta)
                             .addComponent(jLabel1)
                             .addComponent(jRadioButton2)
                             .addComponent(jRadioButton3)
@@ -91,7 +94,7 @@ public class PantallaGestion extends Pantalla {
                 .addGap(57, 57, 57)
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
-                .addComponent(jRadioButton1)
+                .addComponent(rbPonerMulta)
                 .addGap(27, 27, 27)
                 .addComponent(jRadioButton2)
                 .addGap(34, 34, 34)
@@ -108,7 +111,25 @@ public class PantallaGestion extends Pantalla {
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
         
-        new PantallaIdentificacion(stub).setVisible(true);
+        boolean timeout = contador.getTimeout();
+        
+        if(!timeout)
+        {
+            if(rbPonerMulta.isSelected())
+            {
+                contador.reset();
+                
+                new PantallaPonerMulta(stub, contador).setVisible(true);
+            }
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Han pasado 5 minutos, te tienes que volver a identificar.");
+            
+            this.dispose();
+            new PantallaIdentificacion(stub).setVisible(true);
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     /**
@@ -150,10 +171,10 @@ public class PantallaGestion extends Pantalla {
     private javax.swing.JButton bAceptar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JLabel logoDGT;
+    private javax.swing.JRadioButton rbPonerMulta;
     // End of variables declaration//GEN-END:variables
 }
