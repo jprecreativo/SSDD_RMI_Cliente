@@ -123,6 +123,9 @@ public class PantallaGestion extends Pantalla {
             
             else if(rbAlta.isSelected())
                 new PantallaAltaVehiculo(stub, contador, this).setVisible(true);
+            
+            else
+                new PantallaBajaVehiculo(stub, contador, this).setVisible(true);
         }
         
         else
