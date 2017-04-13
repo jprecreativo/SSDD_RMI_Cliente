@@ -32,7 +32,7 @@ public class PantallaGestion extends Pantalla {
         jLabel1 = new javax.swing.JLabel();
         rbPonerMulta = new javax.swing.JRadioButton();
         rbQuitarMulta = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rbAlta = new javax.swing.JRadioButton();
         bAceptar = new javax.swing.JButton();
         jRadioButton4 = new javax.swing.JRadioButton();
 
@@ -51,8 +51,8 @@ public class PantallaGestion extends Pantalla {
         buttonGroup1.add(rbQuitarMulta);
         rbQuitarMulta.setText("Quitar multa");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Alta vehículo");
+        buttonGroup1.add(rbAlta);
+        rbAlta.setText("Alta vehículo");
 
         bAceptar.setText("Aceptar");
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class PantallaGestion extends Pantalla {
                             .addComponent(rbPonerMulta)
                             .addComponent(jLabel1)
                             .addComponent(rbQuitarMulta)
-                            .addComponent(jRadioButton3)
+                            .addComponent(rbAlta)
                             .addComponent(jRadioButton4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(205, 205, 205)
@@ -98,7 +98,7 @@ public class PantallaGestion extends Pantalla {
                 .addGap(27, 27, 27)
                 .addComponent(rbQuitarMulta)
                 .addGap(34, 34, 34)
-                .addComponent(jRadioButton3)
+                .addComponent(rbAlta)
                 .addGap(36, 36, 36)
                 .addComponent(jRadioButton4)
                 .addGap(70, 70, 70)
@@ -111,9 +111,7 @@ public class PantallaGestion extends Pantalla {
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
         
-        boolean timeout = contador.getTimeout();
-        
-        if(!timeout)
+       if(!contador.getTimeout())
         {
             contador.reset();
             
@@ -122,6 +120,9 @@ public class PantallaGestion extends Pantalla {
             
             else if(rbQuitarMulta.isSelected())
                 new PantallaQuitarMulta(stub, contador, this).setVisible(true);
+            
+            else if(rbAlta.isSelected())
+                new PantallaAltaVehiculo(stub, contador, this).setVisible(true);
         }
         
         else
@@ -172,9 +173,9 @@ public class PantallaGestion extends Pantalla {
     private javax.swing.JButton bAceptar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JLabel logoDGT;
+    private javax.swing.JRadioButton rbAlta;
     private javax.swing.JRadioButton rbPonerMulta;
     private javax.swing.JRadioButton rbQuitarMulta;
     // End of variables declaration//GEN-END:variables

@@ -125,9 +125,7 @@ public class PantallaPonerMulta extends Pantalla {
 
     private void btMultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMultarActionPerformed
         
-        boolean timeout = contador.getTimeout();
-        
-        if(!timeout)
+        if(!contador.getTimeout())
         {
             contador.reset();
             

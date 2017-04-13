@@ -39,7 +39,7 @@
                           <Component id="rbPonerMulta" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="rbQuitarMulta" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbAlta" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jRadioButton4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -64,7 +64,7 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="rbQuitarMulta" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="rbAlta" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
@@ -108,7 +108,7 @@
         <Property name="text" type="java.lang.String" value="Quitar multa"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+    <Component class="javax.swing.JRadioButton" name="rbAlta">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>

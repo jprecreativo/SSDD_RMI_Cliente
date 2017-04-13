@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author jose_
  */
-public class PantallaQuitarMulta extends Pantalla {
+public class PantallaAltaVehiculo extends Pantalla {
 
     private static InterfazMultas stub;
     private final Contador contador;
@@ -20,18 +20,18 @@ public class PantallaQuitarMulta extends Pantalla {
     /**
      * Creates new form PantallaConsultarPuntos
      * @param stub Para acceder a los métodos del servidor.
-     * @param contador Servirá para comprobar el tiempo. Si han pasado 5 minutos, no se dejará hacer ninguna acción.
+     * @param contador Pantalla que me creó. La cerraré cuando pasen los 5 minutos.
      * @param padre Pantalla que me creó. La cerraré cuando pasen los 5 minutos.
      */
-    public PantallaQuitarMulta(InterfazMultas stub, Contador contador, PantallaGestion padre) {
+    public PantallaAltaVehiculo(InterfazMultas stub, Contador contador, PantallaGestion padre) {
         
         initComponents();
-        super.inicializar(500, 200, "Quitar multa");
-        PantallaQuitarMulta.stub = stub;
+        super.inicializar(500, 200, "Consultar puntos");
+        PantallaAltaVehiculo.stub = stub;
         this.contador = contador;
         this.padre = padre;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,33 +41,30 @@ public class PantallaQuitarMulta extends Pantalla {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        btMultar = new javax.swing.JButton();
-        jlInfo = new javax.swing.JLabel();
-        cbMat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        tfFecha = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btAlta = new javax.swing.JButton();
+        jlInfo = new javax.swing.JLabel();
+        tfDNI = new javax.swing.JTextField();
+        tfMat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setText("DNI:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Matrícula:");
 
-        btMultar.setText("Retirar");
-        btMultar.addActionListener(new java.awt.event.ActionListener() {
+        btAlta.setText("Dar de alta");
+        btAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMultarActionPerformed(evt);
+                btAltaActionPerformed(evt);
             }
         });
 
         jlInfo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        cbMat.setEditable(true);
-        cbMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7861-HJI", "5661-LLK", "0988-HKP" }));
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Fecha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,19 +72,19 @@ public class PantallaQuitarMulta extends Pantalla {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btMultar)
-                .addGap(0, 18, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 25, Short.MAX_VALUE)
+                        .addComponent(btAlta)))
+                .addGap(0, 29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,41 +92,41 @@ public class PantallaQuitarMulta extends Pantalla {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(btMultar)
-                    .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAlta)
                     .addComponent(jLabel1)
-                    .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(tfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btMultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMultarActionPerformed
+    private void btAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAltaActionPerformed
         
         if(!contador.getTimeout())
         {
             contador.reset();
             
-            String mat = cbMat.getSelectedItem().toString();
-            String fecha = tfFecha.getText();
-        
-            if(mat.isEmpty() || fecha.isEmpty())
+            String DNI = tfDNI.getText();
+            String mat = tfMat.getText();
+
+            if(DNI.isEmpty() || mat.isEmpty() || !DNI.matches("^[0-9]\\d*$"))
                 jlInfo.setText("Los datos especificados no son correctos.");
 
             else
             {
                 try 
                 {
-                    int result = stub.quitarMulta(mat, fecha);
+                    int result = stub.altaVehiculo(Integer.parseInt(DNI), mat);
 
-                    if(result == 1)
-                        jlInfo.setText("Se ha quitado la multa correctamente.");
+                    if(result == 0)
+                        jlInfo.setText("Los datos especificados no son correctos o el vehículo ya está dado de alta.");
 
                     else
-                        jlInfo.setText("Los datos especificados no son correctos.");
+                        jlInfo.setText("El vehículo se ha dado del alta correctamente.");
                 } 
 
                 catch (RemoteException ex) 
@@ -147,7 +144,7 @@ public class PantallaQuitarMulta extends Pantalla {
             this.dispose();
             new PantallaIdentificacion(stub).setVisible(true);
         }
-    }//GEN-LAST:event_btMultarActionPerformed
+    }//GEN-LAST:event_btAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,11 +182,11 @@ public class PantallaQuitarMulta extends Pantalla {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btMultar;
-    private javax.swing.JComboBox<String> cbMat;
+    private javax.swing.JButton btAlta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jlInfo;
-    private javax.swing.JTextField tfFecha;
+    private javax.swing.JTextField tfDNI;
+    private javax.swing.JTextField tfMat;
     // End of variables declaration//GEN-END:variables
 }
