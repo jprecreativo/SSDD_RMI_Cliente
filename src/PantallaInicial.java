@@ -13,6 +13,7 @@ public class PantallaInicial extends Pantalla {
         initComponents();
         super.inicializar(500, 600, "Bienvenido a la aplicación de multas de la DGT");
         PantallaInicial.stub = stub;
+        this.setAlwaysOnTop(true);
     }
 
     /**
@@ -100,6 +101,8 @@ public class PantallaInicial extends Pantalla {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+        
+        this.setAlwaysOnTop(false);
         
         if(rbIdentificacion.isSelected())
             new PantallaIdentificacion(stub).setVisible(true);

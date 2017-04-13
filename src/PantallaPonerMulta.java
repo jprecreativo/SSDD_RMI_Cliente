@@ -1,4 +1,7 @@
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JSpinner.DefaultEditor;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,6 +29,16 @@ public class PantallaPonerMulta extends Pantalla {
         super.inicializar(450, 200, "Poner multa");
         PantallaPonerMulta.stub = stub;
         this.contador = contador;
+        ((DefaultEditor) spPuntos.getEditor()).getTextField().setEditable(false);
+    }
+    
+    /**
+     * Se llamará para saber la fecha y la hora actuales.
+     * @return Devuelve la fecha y hora actuales en un String.
+     */
+    private String obtenerFecha()
+    {
+        return (new SimpleDateFormat("dd/MM/yyyy-HH:mm").format(new Date()));
     }
 
     /**
@@ -42,7 +55,7 @@ public class PantallaPonerMulta extends Pantalla {
         jlInfo = new javax.swing.JLabel();
         cbMat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spPuntos = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,28 +78,28 @@ public class PantallaPonerMulta extends Pantalla {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Puntos:");
 
+        spPuntos.setModel(new javax.swing.SpinnerNumberModel(6, 1, 12, 1));
+        spPuntos.setFocusable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btMultar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(28, 28, 28))
+                        .addComponent(btMultar)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +110,7 @@ public class PantallaPonerMulta extends Pantalla {
                     .addComponent(btMultar)
                     .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -108,30 +121,29 @@ public class PantallaPonerMulta extends Pantalla {
 
     private void btMultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMultarActionPerformed
         
-        /* String DNI = cbDNI.getSelectedItem().toString();
         String mat = cbMat.getSelectedItem().toString();
         
-        if(DNI.equals("") || mat.equals("") || !DNI.matches("^[0-9]\\d*$"))
+        if(mat.equals(""))
             jlInfo.setText("Los datos especificados no son correctos.");
         
         else
         {
             try 
             {
-                int result = stub.comprobarPuntos(Integer.parseInt(DNI), mat);
-
-                if(result == -1)
-                    jlInfo.setText("Los datos especificados no son correctos.");
-
+                int result = stub.ponerMulta(mat, this.obtenerFecha(), (int) spPuntos.getModel().getValue());
+                
+                if(result == 1)
+                    jlInfo.setText("Se ha puesto la multa correctamente.");
+                
                 else
-                    jlInfo.setText("El conductor de DNI " + DNI + " tiene " + result + " puntos.");
+                    jlInfo.setText("Los datos especificados no son correctos.");
             } 
-
+            
             catch (RemoteException ex) 
             {
-
+                
             }
-        } */
+        }
     }//GEN-LAST:event_btMultarActionPerformed
 
     /**
@@ -174,7 +186,7 @@ public class PantallaPonerMulta extends Pantalla {
     private javax.swing.JComboBox<String> cbMat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel jlInfo;
+    private javax.swing.JSpinner spPuntos;
     // End of variables declaration//GEN-END:variables
 }
