@@ -31,7 +31,7 @@ public class Contador extends TimerTask
     }
     
     /**
-     * Resetea al contador, poniendo los segundos a 0.
+     * Resetea el contador, poniendo los segundos a 0.
      */
     public void reset()
     {

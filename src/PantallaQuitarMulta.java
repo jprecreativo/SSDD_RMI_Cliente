@@ -1,8 +1,5 @@
 import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner.DefaultEditor;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +11,7 @@ import javax.swing.JSpinner.DefaultEditor;
  *
  * @author jose_
  */
-public class PantallaPonerMulta extends Pantalla {
+public class PantallaQuitarMulta extends Pantalla {
 
     private static InterfazMultas stub;
     private final Contador contador;
@@ -26,25 +23,15 @@ public class PantallaPonerMulta extends Pantalla {
      * @param contador Servirá para comprobar el tiempo. Si han pasado 5 minutos, no se dejará hacer ninguna acción.
      * @param padre Pantalla que me creó. La cerraré cuando pasen los 5 minutos.
      */
-    public PantallaPonerMulta(InterfazMultas stub, Contador contador, PantallaGestion padre) {
+    public PantallaQuitarMulta(InterfazMultas stub, Contador contador, PantallaGestion padre) {
         
         initComponents();
-        super.inicializar(450, 200, "Poner multa");
-        PantallaPonerMulta.stub = stub;
+        super.inicializar(500, 200, "Quitar multa");
+        PantallaQuitarMulta.stub = stub;
         this.contador = contador;
         this.padre = padre;
-        ((DefaultEditor) spPuntos.getEditor()).getTextField().setEditable(false);
     }
     
-    /**
-     * Se llamará para saber la fecha y la hora actuales.
-     * @return Devuelve la fecha y hora actuales en un String.
-     */
-    private String obtenerFecha()
-    {
-        return (new SimpleDateFormat("dd/MM/yyyy-HH:mm").format(new Date()));
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,14 +46,14 @@ public class PantallaPonerMulta extends Pantalla {
         jlInfo = new javax.swing.JLabel();
         cbMat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        spPuntos = new javax.swing.JSpinner();
+        tfFecha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Matrícula:");
 
-        btMultar.setText("Multar");
+        btMultar.setText("Retirar");
         btMultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btMultarActionPerformed(evt);
@@ -80,30 +67,27 @@ public class PantallaPonerMulta extends Pantalla {
         cbMat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7861-HJI", "5661-LLK", "0988-HKP" }));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Puntos:");
-
-        spPuntos.setModel(new javax.swing.SpinnerNumberModel(6, 1, 12, 1));
-        spPuntos.setFocusable(false);
+        jLabel1.setText("Fecha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
                         .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(spPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btMultar)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btMultar)
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,10 +98,10 @@ public class PantallaPonerMulta extends Pantalla {
                     .addComponent(btMultar)
                     .addComponent(cbMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(spPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,18 +116,19 @@ public class PantallaPonerMulta extends Pantalla {
             contador.reset();
             
             String mat = cbMat.getSelectedItem().toString();
+            String fecha = tfFecha.getText();
         
-            if(mat.isEmpty())
+            if(mat.isEmpty() || fecha.isEmpty())
                 jlInfo.setText("Los datos especificados no son correctos.");
 
             else
             {
                 try 
                 {
-                    int result = stub.ponerMulta(mat, this.obtenerFecha(), (int) spPuntos.getModel().getValue());
+                    int result = stub.quitarMulta(mat, fecha);
 
                     if(result == 1)
-                        jlInfo.setText("Se ha puesto la multa correctamente.");
+                        jlInfo.setText("Se ha quitado la multa correctamente.");
 
                     else
                         jlInfo.setText("Los datos especificados no son correctos.");
@@ -207,6 +192,6 @@ public class PantallaPonerMulta extends Pantalla {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jlInfo;
-    private javax.swing.JSpinner spPuntos;
+    private javax.swing.JTextField tfFecha;
     // End of variables declaration//GEN-END:variables
 }

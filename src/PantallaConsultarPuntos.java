@@ -109,7 +109,7 @@ public class PantallaConsultarPuntos extends Pantalla {
         String DNI = cbDNI.getSelectedItem().toString();
         String mat = cbMat.getSelectedItem().toString();
         
-        if(DNI.equals("") || mat.equals("") || !DNI.matches("^[0-9]\\d*$"))
+        if(DNI.isEmpty() || mat.isEmpty() || !DNI.matches("^[0-9]\\d*$"))
             jlInfo.setText("Los datos especificados no son correctos.");
         
         else

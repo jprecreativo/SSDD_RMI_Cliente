@@ -201,10 +201,12 @@ public class PantallaConsultarMultas extends Pantalla {
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         
+        this.limpiarTabla();
+        
         String DNI = cbDNI.getSelectedItem().toString();
         String mat = cbMat.getSelectedItem().toString();
         
-        if(DNI.equals("") || mat.equals("") || !DNI.matches("^[0-9]\\d*$"))
+        if(DNI.isEmpty() || mat.isEmpty() || !DNI.matches("^[0-9]\\d*$"))
             jlInfo.setText("Los datos especificados no son correctos.");
         
         else
@@ -214,10 +216,7 @@ public class PantallaConsultarMultas extends Pantalla {
                 LinkedList<Multa> result = stub.comprobarMultas(Integer.parseInt(DNI), mat);
 
                 if(result.isEmpty())
-                {
                     jlInfo.setText("El vehículo especificado no tiene multas o los datos son erróneos.");
-                    this.limpiarTabla();
-                }
 
                 else
                 {

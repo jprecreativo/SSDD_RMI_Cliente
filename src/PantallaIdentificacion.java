@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -57,6 +58,12 @@ public class PantallaIdentificacion extends Pantalla {
             }
         });
 
+        tfDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfDNIKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,8 +96,8 @@ public class PantallaIdentificacion extends Pantalla {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        
+    private void validarDNI()
+    {
         String DNI = tfDNI.getText();
         int result = 0;
         
@@ -128,7 +135,18 @@ public class PantallaIdentificacion extends Pantalla {
             this.dispose();
             new PantallaGestion(stub).setVisible(true);
         }
+    }
+    
+    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+        
+        this.validarDNI();
     }//GEN-LAST:event_bAceptarActionPerformed
+
+    private void tfDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDNIKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            this.validarDNI();
+    }//GEN-LAST:event_tfDNIKeyPressed
 
     /**
      * @param args the command line arguments
