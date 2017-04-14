@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -14,9 +15,12 @@ public abstract class Pantalla extends JFrame
      */
     public void inicializar(int ancho, int alto, String title)
     {
+        ImageIcon icon = new ImageIcon("images/iconoDGT.png");
+        
         this.setSize(ancho, alto);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle(title);
+        this.setIconImage(icon.getImage());
     }
 }
